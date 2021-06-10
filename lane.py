@@ -15,16 +15,43 @@ def draw_the_lines(img, lines):
 
     for line in lines:
         for x1,y1,x2,y2 in line:
-            cv.line(blank_image, (x1,y1), (x2,y2), (0,255,0), thickness=3)
+            cv.line(blank_image, (x1,y1), (x2,y2), (0,255,0), thickness=4)
+
+    img = cv.addWeighted(img, 0.8, blank_image, 1, 0.0)
+    return img
 
 
+def process(image):
+    image = cv.imread('road.png')
+    image = cv.cvtColor(image, cv.COLOR_BGR2RGB)
+    print(image.shape)
 
+    height = image.shape[0]
+    width = image.shape[1]
+    region_of_interest_vertices = [
+        (0, height),
+        (width/2, height/2),
+        (width,height)
+    ]
 
-img = cv.imread('road.png')
-gray = cv.cvtColor(img, cv.COLOR_BGR2RGB)
+    gray_image = cv.cvtColor(image, cv.COLOR_RGB2GRAY)
+    canny_image = cv.Canny(gray_image, 100, 200)
+    cropped_image = region_of_interest(canny_image,
+                    np.array([region_of_interest_vertices], np.int32))
+    lines = cv.HoughLinesP(cropped_image,
+                        rho=6,
+                        theta=np.pi/60,
+                        threshold=160,
+                        lines=np.array([]),
+                        minLineLength=40,
+                        maxLineGap=25
+                            )
+    image_with_lines = draw_the_lines(image,lines) 
 
+plt.imshow(image_with_lines)                       
 # plt.imshow(gray)
-# plt.show()
-cv.imshow('Image', gray)
-cv.waitKey(0)
-cv.destroyAllWindows()
+plt.show()
+
+# cv.imshow('Image', gray)
+# cv.waitKey(0)
+# cv.destroyAllWindows()
