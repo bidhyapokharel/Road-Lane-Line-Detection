@@ -18,10 +18,10 @@ Road Line Detection is a machine learning project which detects the edges of lan
     
 **2. Edge Detection:**
    
-   Canny Edge Detection Algorithm was used for detecting edges of the lanes present in the region of interesst we have initialized or declared above.
-   So for canny edge detection, image was firstly converted into gray scale image using cvtColor method.
+    Canny Edge Detection Algorithm was used for detecting edges of the lanes present in the region of interesst we have initialized or declared above.
+    So for canny edge detection, image was firstly converted into gray scale image using cvtColor method.
    
 **3. Hough Line Detection:**
    
-   Probabilistic Hough Line Detection was used to detect the shape of the line whose edges we had detected in above method.
-   Hence, we join the detected line using **draw_the_Line** method.
+    Probabilistic Hough Line Detection was used to detect the shape of the line whose edges we had detected in above method.
+    Hence, we join the detected line using **draw_the_Line** method.
