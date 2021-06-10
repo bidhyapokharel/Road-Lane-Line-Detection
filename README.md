@@ -25,3 +25,5 @@ Road Line Detection is a machine learning project which detects the edges of lan
    
     Probabilistic Hough Line Detection was used to detect the shape of the line whose edges we had detected in above method.
     Hence, we join the detected line using **draw_the_Line** method.
+
+(For videos, video was read using videoCapture method from where got the ret and frame. And the process we did on the images was followed in frame.)
