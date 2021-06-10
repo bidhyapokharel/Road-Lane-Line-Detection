@@ -47,11 +47,25 @@ def process(image):
                         maxLineGap=25
                             )
     image_with_lines = draw_the_lines(image,lines) 
+    return image_with_lines
+    # plt.imshow(image_with_lines)                       
+    # # plt.imshow(gray)
+    # plt.show()
+    # cv.imshow('Image', gray)
+    # cv.waitKey(0)
+    # cv.destroyAllWindows()
 
-plt.imshow(image_with_lines)                       
-# plt.imshow(gray)
-plt.show()
+cap = cv.VideoCapture('road.mp4')
 
-# cv.imshow('Image', gray)
-# cv.waitKey(0)
-# cv.destroyAllWindows()
+while(cap.isOpened()):
+    ret, frame = cap.read()
+    frame = process(frame)
+
+    cv.imshow('frame;',frame)
+    if cv.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv.destroyAllWindows()
+
+
